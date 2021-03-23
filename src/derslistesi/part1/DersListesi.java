@@ -115,12 +115,12 @@ public class DersListesi {
 
     /**
      * kendisine parametre olarak verilen ders koduna ait derse bağlı bir sonraki dersin bilgilerini gösterir.
-     * @param dersKodu
+     * @param ID
      */
-    public void next(String dersKodu) {
+    public void next(int ID) {
         if(doluMu()) {
             if(bas == son) {
-                if (bas.dersKodu.equals(dersKodu)) {
+                if (bas.getID()==ID) {
 
                     System.out.println(bas.next);
                 }
@@ -133,7 +133,7 @@ public class DersListesi {
 
                     while (true) {
                         //Compares node to be found with each node present in the list
-                        if (isaretci.dersKodu.equals(dersKodu)) {
+                        if (isaretci.getID()==ID) {
                             if (isaretci.next != null){
                                 System.out.println();
                                 System.out.println("next :");
@@ -157,6 +157,7 @@ public class DersListesi {
         }
     }
 
+
     /**
      * Listenin boş mu dolu mu olduğunu gösterir
      *
@@ -165,6 +166,7 @@ public class DersListesi {
     public boolean doluMu() {
         return bas != null;
     }
+
 
     /**
      * Tüm ders listesini yazdırır.
@@ -179,6 +181,7 @@ public class DersListesi {
             isaretci = isaretci.next;
         }
     }
+
 
     /**
      * Ders listesinin boyutunu yazdırır.
@@ -195,11 +198,12 @@ public class DersListesi {
         System.out.println("Toplam ders sayısı : " + count);
     }
 
+
     /**
      * Girilen somestr numarasındaki tüm dersleri yazdırır.
      * @param no
      */
-    public void somestrAra(int no) {
+    public void listSemesterCourses(int no) {
         if(no<=0 || no >8) {
             System.out.println("Böyle bir sömestr numarası yoktur");
         }else {
@@ -227,6 +231,7 @@ public class DersListesi {
         }
 
     }
+
 
     /**
      * Kendisine parametre olarak verilen ders koduna sahip tüm derslerin listesini verir.
@@ -308,6 +313,7 @@ public class DersListesi {
             System.out.println("Liste boş");
         }
     }
+
 
     /**
      * Kendisine verilen parametredeki ders kodunu ders listesinden siler.

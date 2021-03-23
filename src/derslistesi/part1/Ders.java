@@ -27,7 +27,8 @@ public class Ders {
 
     @Override
     public String toString() {
-        return "Ders adı :'" + dersAdi + '\'' +
+        return "Ders ID : '" + getID() + '\'' +
+                " , Ders adı :'" + dersAdi + '\'' +
                 ", Ders kodu: '" + dersKodu + '\'' +
                 ", Sömestr no : " + somestrNo ;
 

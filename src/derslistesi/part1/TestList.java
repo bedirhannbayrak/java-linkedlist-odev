@@ -8,10 +8,10 @@ public class TestList {
         dersListesi = new DersListesi();
         dersleriEkle();
         dersListesi.listeyiYazdir();
-        dersListesi.somestrAra(4);
+        dersListesi.listSemesterCourses(4);
         dersListesi.listeBoyutu();
         dersListesi.dersSilByDersKodu("YDI2025");
-        dersListesi.next("BLM2008");
+        dersListesi.next(3);
         dersListesi.nextInSemester("asdsadsada");
         dersListesi.getByCode("BLMxxx");
         dersListesi.dersSilByDersID(64654);
