@@ -1,5 +1,4 @@
-package derslistesi.part1;
-
+package derslistesi.part3;
 
 public class TestList {
 
@@ -8,7 +7,7 @@ public class TestList {
     public static void main(String[] args) {
         dersListesi = new DersListesi();
         dersleriEkle();
-        dersListesi.listeyiYazdir();
+       /* dersListesi.listeyiYazdir();
         dersListesi.listSemesterCourses(4);
         dersListesi.size();
         dersListesi.dersSilByDersKodu("YDI2025");
@@ -16,7 +15,11 @@ public class TestList {
         dersListesi.getByCode("BLMxxx");
         dersListesi.dersSilByDersID(2);
         dersListesi.listeyiYazdir();
-        dersListesi.getByRange(37,45);
+        dersListesi.getByRange(37,45);*/
+        dersListesi.listeyiYazdir();
+        dersListesi.linkSomestr(1);
+        dersListesi.listeyiYazdir();
+        //System.out.println(dersListesi.bas.nextSomestr.nextSomestr);
     }
 
 

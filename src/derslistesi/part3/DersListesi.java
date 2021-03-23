@@ -1,4 +1,4 @@
-package derslistesi.part1;
+package derslistesi.part3;
 
 
 public class DersListesi {
@@ -73,8 +73,8 @@ public class DersListesi {
                     System.out.println("calisti");
                 }
             }
-                else{
-                    //en az iki eleman var
+            else{
+                //en az iki eleman var
                 if (bas.dersKodu.equals(dersKodu)) {
                     //baştakini sil
                     Ders yeniBas = bas.next;
@@ -177,7 +177,7 @@ public class DersListesi {
         while (isaretci != null) {
             System.out.print("ID : " + isaretci.getID() +" , Ders adı : " + isaretci.dersAdi + " ," +
                     " Ders Kodu : " + isaretci.dersKodu + " ," +
-                    " Somestr no : " + isaretci.somestrNo);
+                    " Somestr no : " + isaretci.somestrNo + " , nextSomestrDers : " + isaretci.nextSomestr );
             System.out.println();
             isaretci = isaretci.next;
         }
@@ -238,31 +238,31 @@ public class DersListesi {
      * @param dersKodu
      */
     public void getByCode(String dersKodu) {
-            Ders isaretci = bas;
-            //Liste boş mu kontrolü
-            if (bas == null) {
-                System.out.println("Liste  boş");
-            } else {
-                System.out.println();
-                System.out.println(dersKodu+" kodlu dersler listesi:");
-                int counter = 0;
-                while (true) {
-                    if (isaretci.dersKodu.equals(dersKodu)) {
-                        System.out.println(isaretci.dersAdi);
-                        counter++;
+        Ders isaretci = bas;
+        //Liste boş mu kontrolü
+        if (bas == null) {
+            System.out.println("Liste  boş");
+        } else {
+            System.out.println();
+            System.out.println(dersKodu+" kodlu dersler listesi:");
+            int counter = 0;
+            while (true) {
+                if (isaretci.dersKodu.equals(dersKodu)) {
+                    System.out.println(isaretci.dersAdi);
+                    counter++;
+                }
+                if (isaretci.next != null) {
+                    isaretci = isaretci.next;
+                } else {
+                    if (counter==0) {
+                        System.out.println("Bu koda ait bir ders bulunamadı");
                     }
-                    if (isaretci.next != null) {
-                        isaretci = isaretci.next;
-                    } else {
-                        if (counter==0) {
-                            System.out.println("Bu koda ait bir ders bulunamadı");
-                        }
-                        break;
-                    }
-
+                    break;
                 }
 
             }
+
+        }
 
 
     }
@@ -422,5 +422,44 @@ public class DersListesi {
         }
 
     }
+
+
+    public void linkSomestr(int somestrNo){
+        if(somestrNo<=0 || somestrNo >8) {
+            System.out.println("Böyle bir sömestr numarası yoktur");
+        }else {
+            Ders isaretci = bas;
+            Ders isaretci2 =null;
+            //Liste boş mu kontrolü
+            if (bas == null) {
+                System.out.println("Liste  boş");
+            } else {
+
+                while(isaretci.next!=null){
+                    while (isaretci.next != null) {
+                        if (isaretci.somestrNo == somestrNo) {
+                            isaretci2 = isaretci;
+                            isaretci= isaretci.next;
+                            break;
+                        }
+                        isaretci=isaretci.next;
+                    }
+                    while (isaretci.next !=null) {
+                        if (isaretci.somestrNo == somestrNo) {
+                            isaretci2.nextSomestr = isaretci;
+                            break;
+                        }else{
+                            isaretci=isaretci.next;
+                        }
+
+
+                    }
+
+                }
+
+                }
+
+            }
+        }
 
 }
