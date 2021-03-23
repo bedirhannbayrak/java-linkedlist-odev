@@ -14,6 +14,7 @@ public class DersListesi {
         son = null;
     }
 
+
     /**
      * Ders listesine yeni ders ekler
      *
@@ -35,6 +36,7 @@ public class DersListesi {
         }
     }
 
+
     /**
      * Listenin sonuna eleman ekler
      * @param dersAdi
@@ -52,6 +54,7 @@ public class DersListesi {
             son = yeniDers;
         }
     }
+
 
     /**
      * Kendisine verilen parametredeki ders kodunu ders listesinden siler.
@@ -112,7 +115,6 @@ public class DersListesi {
     }
 
 
-
     /**
      * kendisine parametre olarak verilen ders koduna ait derse bağlı bir sonraki dersin bilgilerini gösterir.
      * @param ID
@@ -132,7 +134,6 @@ public class DersListesi {
                 } else {
 
                     while (true) {
-                        //Compares node to be found with each node present in the list
                         if (isaretci.getID()==ID) {
                             if (isaretci.next != null){
                                 System.out.println();
@@ -371,6 +372,56 @@ public class DersListesi {
         }else{
             System.out.println("Liste boş");
         }
+    }
+
+
+    /**
+     * girilen iki indeks değeri arasındaki tüm liste ögelerini yazdırır.
+     * Girilen indeks aralığı listenin dışındaysa fonksiyon durdurulur.
+     * @param indeks1
+     * @param indeks2
+     */
+    public void getByRange(int indeks1, int indeks2) {
+        if(indeks1>=indeks2 || indeks1<0) {
+            System.out.println("ilk girilen değer ikinciden küçük olmalıdır ve sayılar negatif olmamalıdır.");
+        }else {
+            Ders isaretci = bas;
+            int mevcutIndeks = 0;
+            //Liste boş mu kontrolü
+            if (bas == null) {
+                System.out.println("Liste  boş");
+            } else {
+                System.out.println();
+                System.out.println(indeks1 + ". index ile " + indeks2 + ". indeks arasındaki ders listesi:");
+                while (isaretci.next!=null && mevcutIndeks < indeks1 ) {
+                    isaretci = isaretci.next;
+                    mevcutIndeks++;
+                }
+                /**
+                 * Tüm liste gezilir ve girilen indekse ulaşılamazsa gerekli bilgi verilip fonksiyon durdurulur.
+                 */
+                if (mevcutIndeks<indeks1) {
+                    System.out.println("Girilen indeks değerleri arasında bir ders bulunamadı.");
+                    return;
+                }
+
+                while (isaretci.next!=null && mevcutIndeks < indeks2 ) {
+                    System.out.println(isaretci);
+                    isaretci=isaretci.next;
+                    mevcutIndeks++;
+                }
+
+                /**
+                 * isaretci.next null olduğunda while döngüsünün içine girmediği için listenin son elemanını
+                 * yazdırmıyordu. aşağıdaki kod ile listenin son elemanı yazdırılıyor.
+                 */
+                if(isaretci.next==null && mevcutIndeks != indeks2) {
+                    System.out.println(isaretci);
+                }
+
+            }
+        }
+
     }
 
 }

@@ -12,10 +12,9 @@ public class TestList {
         dersListesi.listeBoyutu();
         dersListesi.dersSilByDersKodu("YDI2025");
         dersListesi.next(3);
-        dersListesi.nextInSemester("asdsadsada");
         dersListesi.getByCode("BLMxxx");
-        dersListesi.dersSilByDersID(64654);
         dersListesi.listeyiYazdir();
+        dersListesi.getByRange(37,45);
     }
 
 

@@ -1,5 +1,10 @@
 package derslistesi.part1;
 
+/**
+ * Ders adı, ders kodu, sömestr numarası ve ders ID'lerinden oluşan bir sınıf yaratıldı
+ * Her sınıf üyesine otomatik olarak ID ataması yapılması için static bir sayaç eklendi.
+ * ID için get ve set metodları oluşturuldu.
+ */
 public class Ders {
     String dersAdi;
     String dersKodu;
