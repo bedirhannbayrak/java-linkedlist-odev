@@ -430,10 +430,21 @@ public class DersListesi {
         }else {
             Ders isaretci = bas;
             Ders isaretci2 =null;
-            //Liste boş mu kontrolü
+            Ders isaretciBas = bas;
+
             if (bas == null) {
                 System.out.println("Liste  boş");
             } else {
+
+                /**
+                 * Listenin sonundaki elemanın başa dönmesi için bulunacak elemanı belirler.
+                 */
+                while (isaretciBas.next != null) {
+                    if (isaretciBas.somestrNo == somestrNo) {
+                        break;
+                    }
+                    isaretciBas=isaretciBas.next;
+                }
 
                 while(isaretci.next!=null){
                     while (isaretci.next != null) {
@@ -444,22 +455,23 @@ public class DersListesi {
                         }
                         isaretci=isaretci.next;
                     }
-                    while (isaretci.next !=null) {
+                    while (true) {
                         if (isaretci.somestrNo == somestrNo) {
                             isaretci2.nextSomestr = isaretci;
                             break;
                         }else{
                             isaretci=isaretci.next;
                         }
-
-
+                        if(isaretci.next == null) {
+                            break;
+                        }
                     }
-
                 }
-
-                }
-
+                /**
+                 * Verdiğimiz sömestr numarasının son elemanını ilk bulduğumuz elemana bağlar.
+                 */
+                isaretci2.nextSomestr=isaretciBas;
             }
         }
-
+    }
 }

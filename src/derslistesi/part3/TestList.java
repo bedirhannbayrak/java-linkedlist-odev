@@ -16,8 +16,8 @@ public class TestList {
         dersListesi.dersSilByDersID(2);
         dersListesi.listeyiYazdir();
         dersListesi.getByRange(37,45);*/
-        dersListesi.listeyiYazdir();
-        dersListesi.linkSomestr(1);
+        //dersListesi.listeyiYazdir();
+        dersListesi.linkSomestr(8);
         dersListesi.listeyiYazdir();
         //System.out.println(dersListesi.bas.nextSomestr.nextSomestr);
     }

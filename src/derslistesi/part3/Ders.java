@@ -9,6 +9,12 @@ public class Ders {
     Ders next;
     Ders nextSomestr;
 
+    /**
+     *
+     * @param dersAdi
+     * @param dersKodu
+     * @param somestrNo
+     */
     public Ders(String dersAdi, String dersKodu, int somestrNo ) {
         this.dersAdi = dersAdi;
         this.dersKodu = dersKodu;
@@ -31,8 +37,8 @@ public class Ders {
         return "Ders ID : '" + getID() + '\'' +
                 " , Ders adı :'" + dersAdi + '\'' +
                 ", Ders kodu: '" + dersKodu + '\'' +
-                ", Sömestr no : " + somestrNo +
-                ", nextSomestrDers : " + nextSomestr;
+                ", Sömestr no : " + somestrNo /* +
+                ", nextSomestrDers : " + nextSomestr*/;
 
     }
 }
