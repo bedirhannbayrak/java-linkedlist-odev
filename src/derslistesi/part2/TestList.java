@@ -8,7 +8,8 @@ public class TestList {
     public static void main(String[] args) {
         dersListesi = new DersListesi();
         dersleriEkle();
-        /*dersListesi.listeyiYazdir();
+        /*
+        dersListesi.listeyiYazdir();
         dersListesi.listSemesterCourses(4);
         dersListesi.size();
         dersListesi.dersSilByDersKodu("YDI2025");
@@ -19,13 +20,22 @@ public class TestList {
         dersListesi.listeyiYazdir();
         dersListesi.getByRange(37,45);
         dersListesi.listeyiYazdir();
-        dersListesi.dersSilByDersID(85);*/
-        dersListesi.size();
-        dersListesi.disable(3);
-        dersListesi.size();
-        dersListesi.getByRange(1,5);
-        System.out.println(dersListesi.isDisabled(55));
+        dersListesi.dersSilByDersID(85);
+        */
 
+        dersListesi.disable(5);
+        dersListesi.listeyiYazdir();
+        dersListesi.showDisabled();
+        System.out.println();
+        dersListesi.disable(6);
+        dersListesi.disable(8);
+        dersListesi.showDisabled();
+        System.out.println();
+        dersListesi.enable(8);
+        dersListesi.enable(5);
+        dersListesi.listeyiYazdir();
+        System.out.println();
+        dersListesi.showDisabled();
     }
 
 
@@ -74,4 +84,7 @@ public class TestList {
         dersListesi.sonaEkle("Atatürk İlkeleri ve İnkılap Tarihi II ", "ATA122",8);
         dersListesi.sonaEkle("Teknik İngilizce", "YDI2025",8);
     }
+
+
+
 }

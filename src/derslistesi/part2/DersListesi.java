@@ -5,6 +5,7 @@ public class DersListesi {
     Ders bas;
     Ders son;
 
+    DisabledList disabledList = new DisabledList();
 
     /**
      * Tüm derslerin listesini yazdırır.
@@ -43,9 +44,11 @@ public class DersListesi {
      * @param somestrNo
      * @param index
      */
-    public void indekseEkle(String dersAdi, String dersKodu, int somestrNo, int index) {
+    public void indekseEkle(String dersAdi, String dersKodu, int somestrNo, int index,int ... id) {
 
         Ders yeniDers = new Ders(dersAdi,dersKodu,somestrNo);
+        yeniDers.setID(id[0]);
+
 
         if(doluMu()) {
             if (index<=0) {
@@ -165,6 +168,7 @@ public class DersListesi {
         if(doluMu()) {
             if(bas == son) {
                 if (bas.getID()==ID) {
+
                     System.out.println(bas.next);
                 }
             }
@@ -206,7 +210,7 @@ public class DersListesi {
      * @return
      */
     public boolean doluMu() {
-        return bas != null ;
+        return bas != null;
     }
 
 
@@ -216,17 +220,11 @@ public class DersListesi {
     public void listeyiYazdir() {
         Ders isaretci = bas;
         while (isaretci != null) {
-            if(isaretci.isEnabled()) {
-                System.out.print("ID : " + isaretci.getID() +" , Ders adı : " + isaretci.dersAdi + " ," +
-                        " Ders Kodu : " + isaretci.dersKodu + " ," +
-                        " Somestr no : " + isaretci.somestrNo);
-                System.out.println();
-                isaretci = isaretci.next;
-            }else{
-                isaretci = isaretci.next;
-            }
-
-
+            System.out.print("ID : " + isaretci.getID() +" , Ders adı : " + isaretci.dersAdi + " ," +
+                    " Ders Kodu : " + isaretci.dersKodu + " ," +
+                    " Somestr no : " + isaretci.somestrNo);
+            System.out.println();
+            isaretci = isaretci.next;
         }
     }
 
@@ -238,10 +236,7 @@ public class DersListesi {
         Ders isaretci = bas;
         int count = 0;
         while (isaretci != null) {
-            if(!isaretci.isEnabled()){
-                isaretci=isaretci.next;
-                continue;
-            }
+
             isaretci = isaretci.next;
             count++;
         }
@@ -266,7 +261,7 @@ public class DersListesi {
                 System.out.println();
                 System.out.println(no+". sömestr dönemindeki ders listesi:");
                 while (true) {
-                    if (isaretci.somestrNo == no && isaretci.isEnabled()) {
+                    if (isaretci.somestrNo == no) {
                         System.out.println(isaretci.dersAdi);
                     }
                     if (isaretci.next != null) {
@@ -319,13 +314,13 @@ public class DersListesi {
 
 
     /**
-     * Ders kodu girilen dersin aynı sömestrdaki bir sonraki dersini gösterir
+     * Ders kodu girilen dersin
      * @param dersKodu
      */
     public void nextInSemester(String dersKodu) {
         if(doluMu()) {
             if(bas == son) {
-                if (bas.dersKodu.equals(dersKodu) && bas.isEnabled()) {
+                if (bas.dersKodu.equals(dersKodu)) {
 
                     System.out.println("listede tek bir ders var");
                 }
@@ -374,10 +369,9 @@ public class DersListesi {
      * @param ID
      */
     public void dersSilByDersID(int ID) {
-
         if(doluMu()) {
             if(bas == son) {
-                if (bas.getID()==ID && bas.isEnabled()) {
+                if (bas.getID()==ID) {
                     bas=null;
                     son=null;
                     System.out.println("calisti");
@@ -385,7 +379,7 @@ public class DersListesi {
             }
             else{
                 //en az iki eleman var
-                if (bas.getID()==ID && bas.isEnabled() ) {
+                if (bas.getID()==ID) {
                     //baştakini sil
                     Ders yeniBas = bas.next;
                     bas.next=null;
@@ -402,7 +396,7 @@ public class DersListesi {
                         /**
                          * sileceğimiz değer listenin son elemanıysa aşağıdaki blok çalışır
                          */
-                        if(isaretci2==son && !isaretci2.isEnabled()){
+                        if(isaretci2==son){
                             son=isaretci1;
                             isaretci1.next=null;
                         }
@@ -411,12 +405,9 @@ public class DersListesi {
                          */
                         else{
                             //ortadan silme
-                            if( isaretci2.isEnabled()) {
-                                Ders isaretci3 = isaretci2.next;
-                                isaretci2.next=null;
-                                isaretci1.next=isaretci3;
-                            }
-
+                            Ders isaretci3 = isaretci2.next;
+                            isaretci2.next=null;
+                            isaretci1.next=isaretci3;
                         }
 
                     }
@@ -447,9 +438,6 @@ public class DersListesi {
                 System.out.println();
                 System.out.println(indeks1 + ". index ile " + indeks2 + ". indeks arasındaki ders listesi:");
                 while (isaretci.next!=null && mevcutIndeks < indeks1 ) {
-                    if(!isaretci.isEnabled()){
-                        isaretci = isaretci.next;
-                    }
                     isaretci = isaretci.next;
                     mevcutIndeks++;
                 }
@@ -462,11 +450,6 @@ public class DersListesi {
                 }
 
                 while (isaretci.next!=null && mevcutIndeks < indeks2 ) {
-                    if(!isaretci.isEnabled()){
-                        isaretci=isaretci.next;
-                        mevcutIndeks++;
-                        continue;
-                    }
                     System.out.println(isaretci);
                     isaretci=isaretci.next;
                     mevcutIndeks++;
@@ -476,7 +459,7 @@ public class DersListesi {
                  * isaretci.next null olduğunda while döngüsünün içine girmediği için listenin son elemanını
                  * yazdırmıyordu. aşağıdaki kod ile listenin son elemanı yazdırılıyor.
                  */
-                if(isaretci.next==null && mevcutIndeks != indeks2 && isaretci.isEnabled()) {
+                if(isaretci.next==null && mevcutIndeks != indeks2) {
                     System.out.println(isaretci);
                 }
 
@@ -491,8 +474,10 @@ public class DersListesi {
             Ders isaretci= bas;
             while(isaretci.next!=null){
                 if(isaretci.getID()==id){
-                    isaretci.setEnabled(false);
                     isaretci.setLastIndex(mevcutIndeks);
+                    disabledList.basaEkle(isaretci.dersAdi,isaretci.dersKodu,isaretci.somestrNo,mevcutIndeks,isaretci.getID());
+                    dersSilByDersID(id);
+                    isaretci=isaretci.next;
                     break;
                 }else{
                     isaretci=isaretci.next;
@@ -500,10 +485,24 @@ public class DersListesi {
                 }
             }
 
+
+
         }else{
             System.out.println("Liste boş");
         }
     }
 
+    public void enable(int id ){
+        if(disabledList.dersBul(id)!=null){
+            Ders ders = disabledList.dersBul(id);
+            indekseEkle(ders.dersAdi,ders.dersKodu,ders.somestrNo,ders.getLastIndex(),ders.getID());
+            disabledList.dersSilByDersID(id);
+        };
+    }
+
+    public void showDisabled(){
+        System.out.println("Etkisizleştirilen dersler listesi : ");
+        disabledList.listeyiYazdir();
+    }
 
 }
