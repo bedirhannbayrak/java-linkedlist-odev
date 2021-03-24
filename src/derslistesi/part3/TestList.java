@@ -5,7 +5,9 @@ public class TestList {
     public static DersListesi dersListesi;
 
     public static void main(String[] args) {
+
         dersListesi = new DersListesi();
+
         dersleriEkle();
        /* dersListesi.listeyiYazdir();
         dersListesi.listSemesterCourses(4);
@@ -17,12 +19,21 @@ public class TestList {
         dersListesi.listeyiYazdir();
         dersListesi.getByRange(37,45);*/
         //dersListesi.listeyiYazdir();
+        /*dersListesi.linkSomestr(1);
+        dersListesi.linkSomestr(2);
+        dersListesi.linkSomestr(3);
+        dersListesi.linkSomestr(4);
+        dersListesi.linkSomestr(5);
+        dersListesi.linkSomestr(6);
+        dersListesi.linkSomestr(7);*/
         dersListesi.linkSomestr(8);
         dersListesi.listeyiYazdir();
-        //System.out.println(dersListesi.bas.nextSomestr.nextSomestr);
+        System.out.println(dersListesi.bas.nextSomestr.nextSomestr);
     }
 
-
+    /**
+     * main fonksiyonu içersinde kod kirliliği olmaması için tüm dersleri ekleyen fonksiyon
+     */
     public static void dersleriEkle(){
         dersListesi = new DersListesi();
         dersListesi.sonaEkle("Bilgisayar Mühendisliğine Giriş" , "BLM1001" , 1);

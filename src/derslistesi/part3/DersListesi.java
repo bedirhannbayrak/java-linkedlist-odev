@@ -441,6 +441,8 @@ public class DersListesi {
                  */
                 while (isaretciBas.next != null) {
                     if (isaretciBas.somestrNo == somestrNo) {
+                        isaretci2 = isaretci;
+                        isaretciBas= isaretciBas;
                         break;
                     }
                     isaretciBas=isaretciBas.next;
@@ -470,6 +472,10 @@ public class DersListesi {
                 /**
                  * Verdiğimiz sömestr numarasının son elemanını ilk bulduğumuz elemana bağlar.
                  */
+                if(isaretci.next==null && (isaretci2.somestrNo==isaretci.somestrNo)) {
+                        isaretci2=isaretci;
+                    }
+
                 isaretci2.nextSomestr=isaretciBas;
             }
         }
