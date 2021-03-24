@@ -38,6 +38,50 @@ public class DersListesi {
 
 
     /**
+     * Ders listesine index parametresinde verilen indexte ders ekler.
+     * @param dersAdi
+     * @param dersKodu
+     * @param somestrNo
+     * @param index
+     */
+    public void indekseEkle(String dersAdi, String dersKodu, int somestrNo, int index) {
+
+        Ders yeniDers = new Ders(dersAdi,dersKodu,somestrNo);
+
+        if(doluMu()) {
+            if (index<=0) {
+                // başa eklemekle aynı
+                yeniDers.next = bas;
+                bas = yeniDers;
+            } else {
+                //orta bir yere ekliyoruz
+                Ders isaretci1 = null;
+                Ders isaretci2 = bas;
+                int mevcutIndeks = 0 ;
+                while(isaretci2!=null && (mevcutIndeks < index)){
+                    isaretci1=isaretci2;
+                    isaretci2=isaretci2.next;
+
+                    mevcutIndeks++;
+                }
+                if(isaretci2==null ){
+                    //son elemana eklemeyle aynı
+                    son.next=yeniDers;
+                    son=yeniDers;
+                } else {
+                    yeniDers.next=isaretci2;
+                    isaretci1.next=yeniDers;
+                }
+            }
+        } else {
+            bas = yeniDers;
+            son = yeniDers;
+        }
+
+    }
+
+
+    /**
      * Listenin sonuna eleman ekler
      * @param dersAdi
      * @param dersKodu
@@ -423,7 +467,11 @@ public class DersListesi {
 
     }
 
-
+    /**
+     * Kendisine parametre olarak verilen sömestr numarasını içeren tüm dersleri birbirine bağlar.
+     * Son dersi ilk derse bağlar
+     * @param somestrNo
+     */
     public void linkSomestr(int somestrNo){
         if(somestrNo<=0 || somestrNo >8) {
             System.out.println("Böyle bir sömestr numarası yoktur");
@@ -448,7 +496,14 @@ public class DersListesi {
                     isaretciBas=isaretciBas.next;
                 }
 
+                /**
+                 * Tüm somestr derslerini birbirine bağlayacak döngü
+                 */
                 while(isaretci.next!=null){
+                    /**
+                     * isaretci2 bağlanacak ilk dersi tutar
+                     * isaretci bir sonraki döngüde bağlanacak elemanı bulur
+                     */
                     while (isaretci.next != null) {
                         if (isaretci.somestrNo == somestrNo) {
                             isaretci2 = isaretci;
@@ -457,6 +512,9 @@ public class DersListesi {
                         }
                         isaretci=isaretci.next;
                     }
+                    /**
+                     * isaretci2 bağlanacak elemanı bulan isaretciye bağlanır
+                     */
                     while (true) {
                         if (isaretci.somestrNo == somestrNo) {
                             isaretci2.nextSomestr = isaretci;
@@ -470,12 +528,16 @@ public class DersListesi {
                     }
                 }
                 /**
-                 * Verdiğimiz sömestr numarasının son elemanını ilk bulduğumuz elemana bağlar.
+                 * isaretci.next null döndüğünde döngüden çıkılacağı için
+                 * eğer son eleman bizim aradığımız sömestr numarasına sahipse
+                 * isaretci2 ye isaretciyi atamamız gerekir. Aksi takdirde son eleman boş kalacaktır.
                  */
-                if(isaretci.next==null && (isaretci2.somestrNo==isaretci.somestrNo)) {
+                if( (isaretci2.somestrNo==isaretci.somestrNo)) {
                         isaretci2=isaretci;
                     }
-
+                /**
+                 * Son bağlanan somestr linkini ilk derse bağlayarak circular yapı sağlanır.
+                 */
                 isaretci2.nextSomestr=isaretciBas;
             }
         }

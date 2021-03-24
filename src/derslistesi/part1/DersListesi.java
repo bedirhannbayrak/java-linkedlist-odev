@@ -36,6 +36,48 @@ public class DersListesi {
         }
     }
 
+    /**
+     * Ders listesine index parametresinde verilen indexte ders ekler.
+     * @param dersAdi
+     * @param dersKodu
+     * @param somestrNo
+     * @param index
+     */
+    public void indekseEkle(String dersAdi, String dersKodu, int somestrNo, int index) {
+
+        Ders yeniDers = new Ders(dersAdi,dersKodu,somestrNo);
+
+        if(doluMu()) {
+            if (index<=0) {
+                // başa eklemekle aynı
+                yeniDers.next = bas;
+                bas = yeniDers;
+            } else {
+                //orta bir yere ekliyoruz
+                Ders isaretci1 = null;
+                Ders isaretci2 = bas;
+                int mevcutIndeks = 0 ;
+                while(isaretci2!=null && (mevcutIndeks < index)){
+                    isaretci1=isaretci2;
+                    isaretci2=isaretci2.next;
+
+                    mevcutIndeks++;
+                }
+                if(isaretci2==null ){
+                    //son elemana eklemeyle aynı
+                    son.next=yeniDers;
+                    son=yeniDers;
+                } else {
+                    yeniDers.next=isaretci2;
+                    isaretci1.next=yeniDers;
+                }
+            }
+        } else {
+            bas = yeniDers;
+            son = yeniDers;
+        }
+
+    }
 
     /**
      * Listenin sonuna eleman ekler

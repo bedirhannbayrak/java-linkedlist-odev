@@ -14,9 +14,11 @@ public class TestList {
         dersListesi.dersSilByDersKodu("YDI2025");
         dersListesi.next(3);
         dersListesi.getByCode("BLMxxx");
+        dersListesi.indekseEkle("test","test",8,3);
         dersListesi.dersSilByDersID(2);
         dersListesi.listeyiYazdir();
         dersListesi.getByRange(37,45);
+        dersListesi.listeyiYazdir();
     }
 
 

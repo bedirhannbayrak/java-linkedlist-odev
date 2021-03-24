@@ -26,13 +26,15 @@ public class TestList {
         dersListesi.linkSomestr(5);
         dersListesi.linkSomestr(6);
         dersListesi.linkSomestr(7);*/
-        dersListesi.linkSomestr(8);
+        //dersListesi.linkSomestr(8);
+
+        tumSomestrlariBagla();
         dersListesi.listeyiYazdir();
-        System.out.println(dersListesi.bas.nextSomestr.nextSomestr);
+
     }
 
     /**
-     * main fonksiyonu içersinde kod kirliliği olmaması için tüm dersleri ekleyen fonksiyon
+     * Main fonksiyonu içersinde kod kirliliği olmaması için tüm dersleri ekleyen fonksiyon
      */
     public static void dersleriEkle(){
         dersListesi = new DersListesi();
@@ -79,4 +81,22 @@ public class TestList {
         dersListesi.sonaEkle("Atatürk İlkeleri ve İnkılap Tarihi II ", "ATA122",8);
         dersListesi.sonaEkle("Teknik İngilizce", "YDI2025",8);
     }
+
+    /**
+     * Main fonksiyonu içersinde kod kirliliği olmaması için tüm sömestr derslerini
+     * birbirine bağlayan fonksiyon
+     */
+    public static void tumSomestrlariBagla() {
+
+        dersListesi.linkSomestr(1);
+        dersListesi.linkSomestr(2);
+        dersListesi.linkSomestr(3);
+        dersListesi.linkSomestr(4);
+        dersListesi.linkSomestr(5);
+        dersListesi.linkSomestr(6);
+        dersListesi.linkSomestr(7);
+        dersListesi.linkSomestr(8);
+
+    }
 }
+

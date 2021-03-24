@@ -1,9 +1,13 @@
 package derslistesi.part3;
 
+
 public class Ders {
     String dersAdi;
     String dersKodu;
     int somestrNo;
+    /**
+     * tüm derslere otomatik olarak id atanması için static count değişkenti oluşturuldu
+     */
     private static int count = 0;
     private int ID;
     Ders next;
@@ -23,6 +27,7 @@ public class Ders {
         this.next = null;
         this.nextSomestr=null;
     }
+
 
     public int getID() {
         return ID;
