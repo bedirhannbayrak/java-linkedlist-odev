@@ -38,16 +38,25 @@ public class DersListesi {
     }
 
     /**
-     * Ders listesine index parametresinde verilen indexte ders ekler.
+     * Dersi disable ederken id ve indeks numaralarını da DisabledList listesine göndermiştik
+     * tekrar enable ederken kaçıncı indekste kaldıysa o indekse yerleştiriyoruz.
+     * id'sini de aynı id yapıyoruz
+     *
      * @param dersAdi
      * @param dersKodu
      * @param somestrNo
      * @param index
+     * @param id
      */
     public void indekseEkle(String dersAdi, String dersKodu, int somestrNo, int index,int ... id) {
 
         Ders yeniDers = new Ders(dersAdi,dersKodu,somestrNo);
-        yeniDers.setID(id[0]);
+        try{
+            yeniDers.setID(id[0]);
+        } catch (Exception e){
+
+        }
+
 
 
         if(doluMu()) {
@@ -314,7 +323,7 @@ public class DersListesi {
 
 
     /**
-     * Ders kodu girilen dersin
+     * Ders kodu girilen dersten bir sonraki dersi ekrana yazdırır
      * @param dersKodu
      */
     public void nextInSemester(String dersKodu) {
@@ -468,6 +477,14 @@ public class DersListesi {
 
     }
 
+    /**
+     * ID'si verilen dersi disable durumuna getirir.
+     * Tekrar enable edeceğimizde aynı indekse koyabilmemiz için bulunduğu indeksi de kaydeder.
+     * Tekrar aynı id ile kaydedebilmemiz için id'sini de kaydeder.
+     * Tüm verilerle birlikte DisabledList sınıfına yeni nesne olarak gönderilir
+     * Mevcut listeden silinir.
+     * @param id
+     */
     public void disable(int id) {
         if (doluMu()){
             int mevcutIndeks=0;
@@ -484,14 +501,18 @@ public class DersListesi {
                     mevcutIndeks++;
                 }
             }
-
-
-
         }else{
             System.out.println("Liste boş");
         }
     }
 
+    /**
+     * Disable ederken kaydettiğimiz id numarasını dersBul() metoduna parametre olarak gönderir.
+     * dersBul() metodu geriye aradığımız dersi döndürür.
+     * Dönen dersi indekseEkle() metoduyla eski indeksine kaydeder.
+     * Enable eder
+     * @param id
+     */
     public void enable(int id ){
         if(disabledList.dersBul(id)!=null){
             Ders ders = disabledList.dersBul(id);
@@ -500,6 +521,9 @@ public class DersListesi {
         };
     }
 
+    /**
+     * DisabletList sınıfına kaydettiğimiz disabled durumunda olan dersleri listeler.
+     */
     public void showDisabled(){
         System.out.println("Etkisizleştirilen dersler listesi : ");
         disabledList.listeyiYazdir();

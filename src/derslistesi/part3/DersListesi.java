@@ -178,7 +178,13 @@ public class DersListesi {
         while (isaretci != null) {
             System.out.print("ID : " + isaretci.getID() +" , Ders adı : " + isaretci.dersAdi + " ," +
                     " Ders Kodu : " + isaretci.dersKodu + " ," +
-                    " Somestr no : " + isaretci.somestrNo + " , nextSomestrDers : " + isaretci.nextSomestr );
+                    " Somestr no : " + isaretci.somestrNo + " , nextSomestrDersIDsi : " /*+ isaretci.nextSomestr*/ );
+
+            if(isaretci.nextSomestr!= null){
+                System.out.print( isaretci.nextSomestr.getID());
+            }else{
+                System.out.print("Henüz bağlanmamış.");
+            }
             System.out.println();
             isaretci = isaretci.next;
         }
@@ -270,7 +276,7 @@ public class DersListesi {
 
 
     /**
-     * Ders kodu girilen dersin
+     * Ders kodu girilen dersten bir sonraki dersi ekrana yazdırır
      * @param dersKodu
      */
     public void nextInSemester(String dersKodu) {
@@ -376,7 +382,7 @@ public class DersListesi {
 
 
     /**
-     * girilen iki indeks değeri arasındaki tüm liste ögelerini yazdırır.
+     * Girilen iki indeks değeri arasındaki tüm liste ögelerini yazdırır.
      * Girilen indeks aralığı listenin dışındaysa fonksiyon durdurulur.
      * @param indeks1
      * @param indeks2
@@ -447,7 +453,6 @@ public class DersListesi {
                 while (isaretciBas.next != null) {
                     if (isaretciBas.somestrNo == somestrNo) {
                         isaretci2 = isaretci;
-                        isaretciBas= isaretciBas;
                         break;
                     }
                     isaretciBas=isaretciBas.next;

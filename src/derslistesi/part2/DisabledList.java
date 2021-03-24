@@ -1,18 +1,24 @@
 package derslistesi.part2;
 
+
+/**
+ * Disabled derslerden oluşan linked list oluşturucu sınıf.
+ * DersListesi sınıfından silinen silinen elemanlar bu listeye kaydolur.
+ */
 public class DisabledList {
     Ders bas;
     Ders son;
 
 
-    /**
-     * Tüm derslerin listesini yazdırır.
-     */
+
     public DisabledList() {
         bas = null;
         son = null;
     }
 
+    /**
+     * Disabled durumda olan dersleri yazdırır.
+     */
     public void listeyiYazdir() {
         Ders isaretci = bas;
         while (isaretci != null) {
@@ -26,7 +32,8 @@ public class DisabledList {
 
 
     /**
-     *
+     * DersListesi sınıfının içindeki disable(); methodunun içerisinde çağrılır.
+     * DersListesi sınıfında disable edilen ders bu listeye eklenir.
      * @param dersAdi
      * @param dersKodu
      * @param somestrNo
@@ -39,19 +46,20 @@ public class DisabledList {
         ders.setID(id);
 
         if (doluMu()) {
-            // liste dolu
             ders.next = bas;
             bas = ders;
-
-
         } else {
-            // liste boş
             bas = ders;
             son = ders;
         }
     }
 
-
+    /**
+     * verilen ID numarasını liste içerisinde arar.
+     * ID bulunuyorsa dersi geri döndürür.
+     * @param id
+     * @return
+     */
     public Ders dersBul(int id ){
         if(doluMu()){
             Ders isaretci;
@@ -137,8 +145,5 @@ public class DisabledList {
             System.out.println("Liste boş");
         }
     }
-
-
-
 
 }

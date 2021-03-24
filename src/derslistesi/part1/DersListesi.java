@@ -311,7 +311,7 @@ public class DersListesi {
 
 
     /**
-     * Ders kodu girilen dersin
+     * Ders kodu girilen dersten bir sonraki dersi ekrana yazdırır
      * @param dersKodu
      */
     public void nextInSemester(String dersKodu) {
