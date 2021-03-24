@@ -1,4 +1,4 @@
-package derslistesi.part3;
+package derslistesi.part2;
 
 
 public class DersListesi {
@@ -36,7 +36,48 @@ public class DersListesi {
         }
     }
 
+    /**
+     * Ders listesine index parametresinde verilen indexte ders ekler.
+     * @param dersAdi
+     * @param dersKodu
+     * @param somestrNo
+     * @param index
+     */
+    public void indekseEkle(String dersAdi, String dersKodu, int somestrNo, int index) {
 
+        Ders yeniDers = new Ders(dersAdi,dersKodu,somestrNo);
+
+        if(doluMu()) {
+            if (index<=0) {
+                // başa eklemekle aynı
+                yeniDers.next = bas;
+                bas = yeniDers;
+            } else {
+                //orta bir yere ekliyoruz
+                Ders isaretci1 = null;
+                Ders isaretci2 = bas;
+                int mevcutIndeks = 0 ;
+                while(isaretci2!=null && (mevcutIndeks < index)){
+                    isaretci1=isaretci2;
+                    isaretci2=isaretci2.next;
+
+                    mevcutIndeks++;
+                }
+                if(isaretci2==null ){
+                    //son elemana eklemeyle aynı
+                    son.next=yeniDers;
+                    son=yeniDers;
+                } else {
+                    yeniDers.next=isaretci2;
+                    isaretci1.next=yeniDers;
+                }
+            }
+        } else {
+            bas = yeniDers;
+            son = yeniDers;
+        }
+
+    }
 
     /**
      * Listenin sonuna eleman ekler
@@ -74,8 +115,8 @@ public class DersListesi {
                     System.out.println("calisti");
                 }
             }
-            else{
-                //en az iki eleman var
+                else{
+                    //en az iki eleman var
                 if (bas.dersKodu.equals(dersKodu)) {
                     //baştakini sil
                     Ders yeniBas = bas.next;
@@ -124,7 +165,6 @@ public class DersListesi {
         if(doluMu()) {
             if(bas == son) {
                 if (bas.getID()==ID) {
-
                     System.out.println(bas.next);
                 }
             }
@@ -166,7 +206,7 @@ public class DersListesi {
      * @return
      */
     public boolean doluMu() {
-        return bas != null;
+        return bas != null ;
     }
 
 
@@ -176,11 +216,17 @@ public class DersListesi {
     public void listeyiYazdir() {
         Ders isaretci = bas;
         while (isaretci != null) {
-            System.out.print("ID : " + isaretci.getID() +" , Ders adı : " + isaretci.dersAdi + " ," +
-                    " Ders Kodu : " + isaretci.dersKodu + " ," +
-                    " Somestr no : " + isaretci.somestrNo + " , nextSomestrDers : " + isaretci.nextSomestr );
-            System.out.println();
-            isaretci = isaretci.next;
+            if(isaretci.isEnabled()) {
+                System.out.print("ID : " + isaretci.getID() +" , Ders adı : " + isaretci.dersAdi + " ," +
+                        " Ders Kodu : " + isaretci.dersKodu + " ," +
+                        " Somestr no : " + isaretci.somestrNo);
+                System.out.println();
+                isaretci = isaretci.next;
+            }else{
+                isaretci = isaretci.next;
+            }
+
+
         }
     }
 
@@ -192,7 +238,10 @@ public class DersListesi {
         Ders isaretci = bas;
         int count = 0;
         while (isaretci != null) {
-
+            if(!isaretci.isEnabled()){
+                isaretci=isaretci.next;
+                continue;
+            }
             isaretci = isaretci.next;
             count++;
         }
@@ -217,7 +266,7 @@ public class DersListesi {
                 System.out.println();
                 System.out.println(no+". sömestr dönemindeki ders listesi:");
                 while (true) {
-                    if (isaretci.somestrNo == no) {
+                    if (isaretci.somestrNo == no && isaretci.isEnabled()) {
                         System.out.println(isaretci.dersAdi);
                     }
                     if (isaretci.next != null) {
@@ -239,44 +288,44 @@ public class DersListesi {
      * @param dersKodu
      */
     public void getByCode(String dersKodu) {
-        Ders isaretci = bas;
-        //Liste boş mu kontrolü
-        if (bas == null) {
-            System.out.println("Liste  boş");
-        } else {
-            System.out.println();
-            System.out.println(dersKodu+" kodlu dersler listesi:");
-            int counter = 0;
-            while (true) {
-                if (isaretci.dersKodu.equals(dersKodu)) {
-                    System.out.println(isaretci.dersAdi);
-                    counter++;
-                }
-                if (isaretci.next != null) {
-                    isaretci = isaretci.next;
-                } else {
-                    if (counter==0) {
-                        System.out.println("Bu koda ait bir ders bulunamadı");
+            Ders isaretci = bas;
+            //Liste boş mu kontrolü
+            if (bas == null) {
+                System.out.println("Liste  boş");
+            } else {
+                System.out.println();
+                System.out.println(dersKodu+" kodlu dersler listesi:");
+                int counter = 0;
+                while (true) {
+                    if (isaretci.dersKodu.equals(dersKodu)) {
+                        System.out.println(isaretci.dersAdi);
+                        counter++;
                     }
-                    break;
+                    if (isaretci.next != null) {
+                        isaretci = isaretci.next;
+                    } else {
+                        if (counter==0) {
+                            System.out.println("Bu koda ait bir ders bulunamadı");
+                        }
+                        break;
+                    }
+
                 }
 
             }
-
-        }
 
 
     }
 
 
     /**
-     * Ders kodu girilen dersin
+     * Ders kodu girilen dersin aynı sömestrdaki bir sonraki dersini gösterir
      * @param dersKodu
      */
     public void nextInSemester(String dersKodu) {
         if(doluMu()) {
             if(bas == son) {
-                if (bas.dersKodu.equals(dersKodu)) {
+                if (bas.dersKodu.equals(dersKodu) && bas.isEnabled()) {
 
                     System.out.println("listede tek bir ders var");
                 }
@@ -325,9 +374,10 @@ public class DersListesi {
      * @param ID
      */
     public void dersSilByDersID(int ID) {
+
         if(doluMu()) {
             if(bas == son) {
-                if (bas.getID()==ID) {
+                if (bas.getID()==ID && bas.isEnabled()) {
                     bas=null;
                     son=null;
                     System.out.println("calisti");
@@ -335,7 +385,7 @@ public class DersListesi {
             }
             else{
                 //en az iki eleman var
-                if (bas.getID()==ID) {
+                if (bas.getID()==ID && bas.isEnabled() ) {
                     //baştakini sil
                     Ders yeniBas = bas.next;
                     bas.next=null;
@@ -352,7 +402,7 @@ public class DersListesi {
                         /**
                          * sileceğimiz değer listenin son elemanıysa aşağıdaki blok çalışır
                          */
-                        if(isaretci2==son){
+                        if(isaretci2==son && !isaretci2.isEnabled()){
                             son=isaretci1;
                             isaretci1.next=null;
                         }
@@ -361,9 +411,12 @@ public class DersListesi {
                          */
                         else{
                             //ortadan silme
-                            Ders isaretci3 = isaretci2.next;
-                            isaretci2.next=null;
-                            isaretci1.next=isaretci3;
+                            if( isaretci2.isEnabled()) {
+                                Ders isaretci3 = isaretci2.next;
+                                isaretci2.next=null;
+                                isaretci1.next=isaretci3;
+                            }
+
                         }
 
                     }
@@ -394,6 +447,9 @@ public class DersListesi {
                 System.out.println();
                 System.out.println(indeks1 + ". index ile " + indeks2 + ". indeks arasındaki ders listesi:");
                 while (isaretci.next!=null && mevcutIndeks < indeks1 ) {
+                    if(!isaretci.isEnabled()){
+                        isaretci = isaretci.next;
+                    }
                     isaretci = isaretci.next;
                     mevcutIndeks++;
                 }
@@ -406,6 +462,11 @@ public class DersListesi {
                 }
 
                 while (isaretci.next!=null && mevcutIndeks < indeks2 ) {
+                    if(!isaretci.isEnabled()){
+                        isaretci=isaretci.next;
+                        mevcutIndeks++;
+                        continue;
+                    }
                     System.out.println(isaretci);
                     isaretci=isaretci.next;
                     mevcutIndeks++;
@@ -415,7 +476,7 @@ public class DersListesi {
                  * isaretci.next null olduğunda while döngüsünün içine girmediği için listenin son elemanını
                  * yazdırmıyordu. aşağıdaki kod ile listenin son elemanı yazdırılıyor.
                  */
-                if(isaretci.next==null && mevcutIndeks != indeks2) {
+                if(isaretci.next==null && mevcutIndeks != indeks2 && isaretci.isEnabled()) {
                     System.out.println(isaretci);
                 }
 
@@ -424,79 +485,25 @@ public class DersListesi {
 
     }
 
-    /**
-     * Kendisine parametre olarak verilen sömestr numarasını içeren tüm dersleri birbirine bağlar.
-     * Son dersi ilk derse bağlar
-     * @param somestrNo
-     */
-    public void linkSomestr(int somestrNo){
-        if(somestrNo<=0 || somestrNo >8) {
-            System.out.println("Böyle bir sömestr numarası yoktur");
-        }else {
-            Ders isaretci = bas;
-            Ders isaretci2 =null;
-            Ders isaretciBas = bas;
-
-            if (bas == null) {
-                System.out.println("Liste  boş");
-            } else {
-
-                /**
-                 * Listenin sonundaki elemanın başa dönmesi için bulunacak elemanı belirler.
-                 */
-                while (isaretciBas.next != null) {
-                    if (isaretciBas.somestrNo == somestrNo) {
-                        isaretci2 = isaretci;
-                        isaretciBas= isaretciBas;
-                        break;
-                    }
-                    isaretciBas=isaretciBas.next;
+    public void disable(int id) {
+        if (doluMu()){
+            int mevcutIndeks=0;
+            Ders isaretci= bas;
+            while(isaretci.next!=null){
+                if(isaretci.getID()==id){
+                    isaretci.setEnabled(false);
+                    isaretci.setLastIndex(mevcutIndeks);
+                    break;
+                }else{
+                    isaretci=isaretci.next;
+                    mevcutIndeks++;
                 }
-
-                /**
-                 * Tüm somestr derslerini birbirine bağlayacak döngü
-                 */
-                while(isaretci.next!=null){
-                    /**
-                     * isaretci2 bağlanacak ilk dersi tutar
-                     * isaretci bir sonraki döngüde bağlanacak elemanı bulur
-                     */
-                    while (isaretci.next != null) {
-                        if (isaretci.somestrNo == somestrNo) {
-                            isaretci2 = isaretci;
-                            isaretci= isaretci.next;
-                            break;
-                        }
-                        isaretci=isaretci.next;
-                    }
-                    /**
-                     * isaretci2 bağlanacak elemanı bulan isaretciye bağlanır
-                     */
-                    while (true) {
-                        if (isaretci.somestrNo == somestrNo) {
-                            isaretci2.nextSomestr = isaretci;
-                            break;
-                        }else{
-                            isaretci=isaretci.next;
-                        }
-                        if(isaretci.next == null) {
-                            break;
-                        }
-                    }
-                }
-                /**
-                 * isaretci.next null döndüğünde döngüden çıkılacağı için
-                 * eğer son eleman bizim aradığımız sömestr numarasına sahipse
-                 * isaretci2 ye isaretciyi atamamız gerekir. Aksi takdirde son eleman boş kalacaktır.
-                 */
-                if( (isaretci2.somestrNo==isaretci.somestrNo)) {
-                        isaretci2=isaretci;
-                    }
-                /**
-                 * Son bağlanan somestr linkini ilk derse bağlayarak circular yapı sağlanır.
-                 */
-                isaretci2.nextSomestr=isaretciBas;
             }
+
+        }else{
+            System.out.println("Liste boş");
         }
     }
+
+
 }
