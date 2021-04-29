@@ -29,7 +29,3 @@ Ayrıca aşağıdaki metotların bulunması zorunludur.
 -  Uygulama kısmında kod çalışır ve compile edilebilir olmalıdır. Compile edilemeyen kodlardan 30 puan kırılacaktır. Test ve kaynak kodu birlikte gönderilmelidir. Sınıflar, yöntemler ve değişken adları anlamlı olmalıdır. fonksiyon ve sınıflarınız basit, genel, yeniden kullanılabilir olmalıdır.
 -  Kod %70 değerindedir. - Javadoc Bölümü: sınıflar, yöntemler, değişkenler vb. İçin tüm javadoc açıklamaları eklenmelidir.tüm açıklamalar anlamlı ve anlaşılır olmalıdır. standart java kod adı kurallarını kullanılmalıdır. Bu kısım ekstra 20 puan değerindedir.
 
-##### NOTLANDIRMA:
-
-- Kopya: -250
-- Açıklama ve kısıtlamaların dikkate alınmaması: -100 
