@@ -1,9 +1,6 @@
 
-# BLM 2002 ÖDEV3
-## Veriliş Tarihi: 18.03.2021
+# BLM 2002 ÖDEV
 
-
-### Son Teslim Tarihi: 28.03.2021-23.59
 **Part 1:** Marmara Üniversitesi Bilgisayar Mühendisliği Derslerini içeren bir Linked List yapısı oluşturunuz. Liste ders isimlerini, ders kodlarını, sömestr bilgilerini ve gerekli diğer değişkenleri içermelidir. Bu liste yapısını oluşturduktan sonra aşağıdaki 3 metodu yazınız.
 1. getByCode(string code): Ders kodu verilen tüm dersleri döndürür.
 2. listSemesterCourses(int semester): Verilen sömestrdaki tüm dersleri döndürür.
